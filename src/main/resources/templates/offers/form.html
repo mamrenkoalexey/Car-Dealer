@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container" th:fragment="formFragment(offer, car_models)" th:object="${offer} ">
+    <hr/>
+    <div class="row">
+        <div class="col-6"> Car Model </div>
+        <div class="col-6" >
+            <select th:field="*{car_model}"  style="width: 194px; height: 38px">
+                <option
+                        th:each="car_model : ${car_models}" th:value="${car_model.id}"
+                        th:text="'[' + ${car_model.producer.name} + '] ' + ${car_model.name}"
+                        th:selected="${offer.car_model != null && offer.car_model.id == car_model.id}">
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6"> VIN</div>
+        <div class="col-6">
+            <input
+                    type="text"
+                    name="name"
+                    th:field="*{vin}"
+                    class="form-control"
+                    placeholder="Enter VIN"
+            />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6"> Year</div>
+        <div class="col-6">
+            <input
+                    type="number"
+                    min="1950"
+                    max="2024"
+                    name="name"
+                    th:field="*{year}"
+                    class="form-control"
+                    placeholder="Enter Year"
+            />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6"> Color</div>
+        <div class="col-6">
+            <select id="my-dropdown" style="width: 194px; height: 38px" th:field="*{color}">
+                <option value="black">Black</option>
+                <option value="white">White</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="yellow">Yellow</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6"> Price </div>
+        <div class="col-6">
+            <input
+                    type="number"
+                    name="name"
+                    th:field="*{price}"
+                    class="form-control"
+                    placeholder="Enter Price in $"
+            />
+        </div>
+    </div>
+    <hr/>
+
+    <div class="footer-body" style="text-align: right">
+        <a th:href="@{/offers}" class="btn btn-danger"> Back </a>
+        <button type="submit" class="btn btn-primary"> Submit</button>
+    </div>
+</div>
+</html>

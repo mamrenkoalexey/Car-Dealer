@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container" th:fragment="formFragment(carModel, producers)" th:object="${carModel}">
+    <hr/>
+    <div class="row">
+        <div class="col-6"> Name</div>
+        <div class="col-6">
+            <input
+                    type="text"
+                    name="name"
+                    th:field="*{name}"
+                    class="form-control"
+                    placeholder="Enter Car Model Name"
+            />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6"> Variant</div>
+        <div class="col-6">
+            <select id="my-dropdown" style="width: 194px; height: 38px" th:field="*{variant}">
+                <option value="Sedan">Sedan</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Universal">Universal</option>
+                <option value="Crossover">Crossover</option>
+                <option value="Cabriolet">Cabriolet</option>
+                <option value="Wagon">Wagon</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-6"> Producer</div>
+        <div class="col-6">
+            <select th:field="*{producer}" style="width: 194px; height: 38px" >
+                <option
+                        th:each="producer : ${producers}" th:value="${producer.id}"
+                        th:text="${producer.name}">
+                    th:selected="${carModel.producer != null && carModel.producer.id == producer.id}">
+                </option>
+            </select>
+        </div>
+    </div>
+    <hr/>
+    <div class="row" style="text-align: right">
+        <div class="col-12">
+            <a th:href="@{/carModels}" class="btn btn-danger"> Back </a>
+            <button type="submit" class="btn btn-primary"> Submit</button>
+        </div>
+    </div>
+</div>
+</div>
+</html>

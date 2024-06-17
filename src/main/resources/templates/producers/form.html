@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="container" th:fragment="formFragment(producer)" th:object="${producer}">
+    <hr/>
+    <div class="row">
+        <div class="col-6"> Producer</div>
+        <div class="col-6">
+            <input
+                    type="text"
+                    name="name"
+                    th:field="*{name}"
+                    class="form-control"
+                    placeholder="Enter Producer Name"
+            />
+        </div>
+    </div>
+    <hr/>
+    <div class="row" style="text-align: right">
+        <div class="col-12">
+            <a th:href="@{/producers}" class="btn btn-danger"> Back </a>
+            <button type="submit" class="btn btn-primary"> Submit</button>
+        </div>
+    </div>
+</div>
+</html>

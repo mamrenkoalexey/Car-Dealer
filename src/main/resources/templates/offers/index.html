@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="thymeleaf/layout :: headerFragment"></head>
+
+
+<body>
+<div class="container">
+    <div th:replace="thymeleaf/layout :: menuFragment"></div>
+
+    <div class="row" style="color: aliceblue ">
+        <h1>Offers Directory</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-9">
+            <a th:href="@{/offers/new}" class="btn btn-success mb-3"> New </a></div>
+        <div class="col-lg-3">
+            <a th:href="@{/offers/export}" class="btn btn-primary mb-3"> Export </a>
+            <a th:href="@{/offers/import}" class="btn btn-primary mb-3"> Import </a>
+
+
+        </div>
+    </div>
+
+    <table class="table table-dark">
+        <thead class="table-dark">
+        <tr style="text-align: center" th:width="150">
+            <th>Producer</th>
+            <th>Model</th>
+            <th>VIN</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="offer : ${offers}" style="text-align: center">
+            <td th:text="${offer.car_model.producer.name}"></td>
+            <td th:text="${offer.car_model.name}"></td>
+            <th th:text="${offer.vin}"></th>
+            <th th:text="${offer.year}"></th>
+            <th th:text="${offer.color}"></th>
+            <td th:text="${offer.price}"></td>
+
+            <td style="text-align: center">
+                <a th:href="@{/offers/edit/{id} (id = ${offer.id}) }"
+                   class="btn btn-primary " style="width: 79px"> Update </a>
+                <a th:href="@{/offers/{id} (id = ${offer.id}) }"
+                   class="btn btn-danger " style="width: 79px"> Delete </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+<script th:if="${error != null}" th:replace="~{thymeleaf/layout :: errorFragment(${error})}"></script>
+</html>

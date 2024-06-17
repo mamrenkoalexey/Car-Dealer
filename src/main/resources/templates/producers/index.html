@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{thymeleaf/layout :: headerFragment}"></head>
+
+<body>
+<div class="container">
+    <div th:replace="~{thymeleaf/layout :: menuFragment}"></div>
+
+    <div class="row" style="color: aliceblue" >
+        <h1>Producer Directory</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-9">
+            <a th:href="@{/producers/new}" class="btn btn-success mb-3"> New </a></div>
+        <div class="col-lg-3">
+            <a th:href="@{/producers/export}" class="btn btn-primary mb-3"> Export </a>
+            <a th:href="@{/producers/import}" class="btn btn-primary mb-3"> Import </a>
+        </div>
+    </div>
+
+    <table class="table table-dark">
+        <thead class="table-dark">
+        <tr style="text-align: center">
+            <th>Producer</th>
+            <th th:width="150">Models Count</th>
+            <th th:width="200">Action</th>
+        </tr>
+        </thead>
+
+        <tbody >
+        <tr th:each="producer: ${producers}">
+            <td th:text="${producer.name}"></td>
+            <td th:text="${producer.carModels.size()}" style="text-align: center"></td>
+            <td style="text-align: center">
+                <a th:href="@{/producers/edit/{id} (id = ${producer.id}) }" class="btn btn-primary "
+                   style="width: 79px"> Update </a>
+                <a th:if="${producer.carModels.size()} == 0" th:href="@{/producers/{id} (id = ${producer.id}) }"
+                   class="btn btn-danger " style="width: 79px"> Delete </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script th:if="${error != null}" th:replace="~{thymeleaf/layout :: errorFragment(${error})}"></script>
+</body>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{thymeleaf/layout :: headerFragment}"></head>
+
+<body>
+<div class="container">
+    <div th:replace="~{thymeleaf/layout :: menuFragment}"></div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <div class="row">
+                <div class="col-12">
+                    <h1 style="text-align: center"> New Car Model </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <form method="post" th:action="@{/carModels}">
+                        <div th:replace="~{carModels/form :: formFragment(${carModel}, ${producers})}"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:if="${error != null}" th:replace="~{thymeleaf/layout :: errorFragment(${error})}"></script>
+</html>
